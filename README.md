@@ -67,8 +67,8 @@ python3 create_station_spatial_interpolation.py \
 ### 測站基本資訊檔案
 ```
 station_id longitude latitude elevation
-466850 121.78111111111112 25.07111111111111 756.0
-466880 121.44194444444445 24.997500000000002 10.0
+AAAAAA     120.7811  25.0711  756.0
+BBBBBB     121.4419  24.9975  10.0
 ...
 ```
 
