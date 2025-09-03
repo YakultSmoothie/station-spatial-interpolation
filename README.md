@@ -62,26 +62,6 @@ python3 create_station_spatial_interpolation.py \
     -T 2025073001,2025073002,2025073003
 ```
 
-## 命令列參數
-
-### 必要參數
-- `-i, --input`：測站基本資訊檔案路徑
-- `-i2, --input2`：觀測資料檔案路徑
-
-### 選用參數
-| 參數 | 預設值 | 說明 |
-|------|--------|------|
-| `-V, --variable` | PP01 | 目標變數名稱 (變數名需對應觀測資料檔案) |
-| `-T, --time` | 2025073001,2025073002 | 目標時間（逗號分隔） |
-| `-LL, --lonlat` | 120.0,122.12,21.9,25.4 | 網格邊界（經度最小,經度最大,緯度最小,緯度最大） |
-| `-n, --output_dir` | ./output | 輸出目錄路徑 |
-| `-r, --resolution` | 0.03 | 網格解析度（度） |
-| `-m, --method` | linear | 內插方法 |
-| `--idw_power` | 3.0 | IDW冪次參數 |
-| `--max_distance` | 50.0 | IDW最大搜尋距離（公里） |
-| `-nd, --no_vis` | False | 停用視覺化輸出 |
-| `-utc, --utc_offset` | None | UTC轉換偏移量（+N或-N小時）(轉輸出檔名為_UTC) |
-
 ## 輸入資料格式
 
 ### 測站基本資訊檔案
@@ -117,6 +97,26 @@ output/
     ├── interpolation_visualization_PP01_2025073002_linear.png
     └── interpolation_visualization_PP01_2025073003_linear.png
 ```
+
+## 命令列參數
+
+### 必要參數
+- `-i, --input`：測站基本資訊檔案路徑
+- `-i2, --input2`：觀測資料檔案路徑
+
+### 選用參數
+| 參數 | 預設值 | 說明 |
+|------|--------|------|
+| `-V, --variable` | PP01 | 目標變數名稱 (變數名需對應觀測資料檔案) |
+| `-T, --time` | 2025073001,2025073002 | 目標時間（逗號分隔） |
+| `-LL, --lonlat` | 120.0,122.12,21.9,25.4 | 網格邊界（經度最小,經度最大,緯度最小,緯度最大） |
+| `-n, --output_dir` | ./output | 輸出目錄路徑 |
+| `-r, --resolution` | 0.03 | 網格解析度（度） |
+| `-m, --method` | linear | 內插方法 |
+| `--idw_power` | 3.0 | IDW冪次參數 |
+| `--max_distance` | 50.0 | IDW最大搜尋距離（公里） |
+| `-nd, --no_vis` | False | 停用視覺化輸出 |
+| `-utc, --utc_offset` | None | UTC轉換偏移量（+N或-N小時）(轉輸出檔名為_UTC) |
 
 ## GrADS整合
 
@@ -154,24 +154,26 @@ python3 create_station_spatial_interpolation.py -i data_station.txt -i2 data_202
 
 # IDW內插
 python3 create_station_spatial_interpolation.py -i data_station.txt -i2 data_20250730_pp01.txt -V PP01 -T 2025073001,2025073002,2025073003  -m idw --idw_power 3 --max_distance 30 -n output_idw
+```
 
+### 後處理範例
+```bash
 # 後處理範例 - 3小時累積降水
 grads -bcl "sample_plot.gs"
 ```
 
-
-
-
-
 ## 注意事項
 
-### 時區處理
-- 測站資料通常使用當地時間（例如中央氣象署自動站使用UTC+8）
+### 遺失值
+- 不同來源的資料使用的不同遺失值，在進入程式前先預處理遺失值為NaN
 
 ### 測站基本資訊
 - 確保測站資訊檔案為最新且完整
 - 中央氣象署自動測站網隨時間變化，會新增/退役測站
 - 確認基本資訊與觀測資料間的測站代碼匹配
+
+### 時區處理
+- 測站資料通常使用當地時間（例如中央氣象署自動站使用UTC+8）
 
 ### 網格解析度
 - 大型區域建議先使用較粗解析度測試
