@@ -22,11 +22,11 @@
 - **UTC轉換**：自動本地時間轉UTC時間
 
 ### 內插方法
-- **Linear**：使用scipy.griddata的標準線性內插
-- **Cubic**：三次樣條內插，產生平滑曲面
-- **Nearest**：最近鄰內插，適用於類別資料
-- **IDW (距離反比權重法)**：基於距離的權重方法，可設定參數
-- **Kriging**：使用球面變異函數模型的克利金法
+- **1.1 Linear**：使用 scipy.griddata 的標準線性內插
+- **1.2 Cubic**：三次樣條內插，產生平滑曲面
+- **1.3 Nearest**：最近鄰內插，適用於類別資料
+- **2 IDW (距離反比權重法)**：基於距離的權重方法，可設定參數截段距離與權重次方。非直接使用import。
+- **3 Kriging**：使用 pykrige.ok.OrdinaryKriging 的球面變異函數模型的克利金法
 
 ### 輸出格式
 - **CSV**：內插使用的測站資料
@@ -47,9 +47,9 @@ pip install matplotlib cartopy
 pip install pykrige
 ```
 
-### 系統需求
-- Python 3.10+
-
+### 開發環境設定
+- Python 3.10.12
+- OS: Ubuntu 22.04.3 LTS
 
 ## 使用方法
 
@@ -86,16 +86,13 @@ C0A520 2025073002 29.0 0.0
 output/
 ├── csv/
 │   ├── integrated_station_data_PP01_2025073001.csv
-│   ├── integrated_station_data_PP01_2025073002.csv
-│   └── integrated_station_data_PP01_2025073003.csv
+│   └── integrated_station_data_PP01_... ....png
 ├── nc/
 │   ├── interpolated_PP01_2025073001.nc
-│   ├── interpolated_PP01_2025073002.nc
-│   └── interpolated_PP01_2025073003.nc
+│   └── interpolated_PP01_... ....nc
 └── png/
     ├── interpolation_visualization_PP01_2025073001_linear.png
-    ├── interpolation_visualization_PP01_2025073002_linear.png
-    └── interpolation_visualization_PP01_2025073003_linear.png
+    └── interpolation_visualization_PP01_... ..._linear.png
 ```
 
 ## 命令列參數
@@ -149,11 +146,11 @@ endvars
 
 ### 比較不同內插方法
 ```bash
-# 線性內插
+# 線性內插法
 python3 create_station_spatial_interpolation.py -i data_station.txt -i2 data_20250730_pp01.txt -V PP01 -T 2025073001,2025073002,2025073003 -m linear -n output_linear
 
-# IDW內插
-python3 create_station_spatial_interpolation.py -i data_station.txt -i2 data_20250730_pp01.txt -V PP01 -T 2025073001,2025073002,2025073003  -m idw --idw_power 3 --max_distance 30 -n output_idw
+# IDW內插法
+python3 create_station_spatial_interpolation.py -i data_station.txt -i2 data_20250730_pp01.txt -V PP01 -T 2025073001,2025073002,2025073003 -m idw --idw_power 3 --max_distance 30 -n output_idw
 ```
 
 ### 後處理範例
