@@ -23,7 +23,7 @@
 
 ### 內插方法
 - **1.1 Linear**：使用 scipy.griddata 的標準線性內插
-- **1.2 Cubic**：三次樣條內插，產生平滑曲面
+- **1.2 Cubic**：三次樣條內插(Cubic spline interpolation)，產生平滑內插結果
 - **1.3 Nearest**：最近鄰內插，適用於類別資料
 - **2 IDW (距離反比權重法)**：基於距離的權重方法，可設定參數截段距離與權重次方。本程序直接計算，非使用import。
 - **3 Kriging**：使用 pykrige.ok.OrdinaryKriging 的球面變異函數模型的克利金法
