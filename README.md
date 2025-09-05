@@ -1,4 +1,4 @@
-# 測站資料空間內插工具
+#  空間內插工具 (測站資料 -> 指定網格)
 
 - 氣象測站資料空間內插Python工具，支援多種內插方法與彈性網格配置。
 - create_station_spatial_interpolation.py [v1.0]
