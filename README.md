@@ -47,7 +47,7 @@ pip install matplotlib cartopy
 pip install pykrige
 ```
 
-### 開發環境設定
+### 開發環境（環境參考）
 - Python 3.10.12
 - OS: Ubuntu 22.04.3 LTS
 
