@@ -6,6 +6,7 @@
 # 功能: 測站資料空間內插分析，支援多種內插方法與多時間點批量處理
 # 建立日期: create 2025-09-03
 # 更新日期: update 2025-09-03 (加入UTC時間轉換功能)
+# 更新日期: update 2025-10-03 [v1.0.1] (微調導入方式)
 #
 # Description:
 #   此程式執行下列功能：
@@ -29,6 +30,7 @@ print(f"{'='*80}")
 import pandas as pd
 import numpy as np
 import xarray as xr
+import netCDF4 as nc
 import warnings
 warnings.filterwarnings('ignore')
 import argparse
@@ -50,7 +52,7 @@ def parse_arguments():
   # 當地時間轉UTC時間 (台灣時間 UTC+8)
   python3 create_station_spatial_interpolation.py -i ./data_station.txt -i2 ./data_pp01.txt -V PP01 -T 2025073108 -utc +8
 
-作者: CYC 2025-09-03 [v1.0]
+作者: CYC 2025-10-03 [v1.0.1]
         """)
 
     parser.add_argument('-i', '--input', required=True, help='測站基本資訊檔案路徑 (必要參數)')
