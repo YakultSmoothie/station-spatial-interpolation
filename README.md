@@ -42,13 +42,16 @@
 ### 必要套件
 ```bash
 # 核心科學計算套件
-pip install pandas numpy xarray scipy
+pip install --user pandas numpy xarray scipy
+
+# 安裝工作包 netCDF C 函式庫
+pip3 install --user netCDF4
 
 # 地理空間與視覺化
-pip install matplotlib cartopy
+pip install --user matplotlib cartopy
 
 # 選用：克利金內插法
-pip install pykrige
+pip install --user pykrige
 ```
 
 ### 開發環境（環境參考）
